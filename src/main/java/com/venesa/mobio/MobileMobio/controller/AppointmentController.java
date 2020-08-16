@@ -2,13 +2,11 @@ package com.venesa.mobio.MobileMobio.controller;
 
 import com.venesa.common.DTO.mobio.request.BookingBase;
 import com.venesa.common.Utils.ConstantsUtil;
+import com.venesa.common.config.EnvironmentConfig;
 import com.venesa.mobio.MobileMobio.common.ResponseData;
 import com.venesa.mobio.MobileMobio.common.WrapperResponseData;
-import com.venesa.mobio.MobileMobio.entity.Appointment;
-import com.venesa.mobio.MobileMobio.entity.Survey;
 import com.venesa.mobio.MobileMobio.service.AppointmentService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,15 +19,16 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/mobio/mobile/")
 public class AppointmentController {
     private final WrapperResponseData wrapperResponse;
-    @Autowired
-    private AppointmentService appointmentService;
+    private final EnvironmentConfig environmentConfig;
+    private final AppointmentService appointmentService;
 
     @PutMapping("/updateAppointment")
     public ResponseEntity<?> updateAppointment(@RequestBody BookingBase rq, HttpServletRequest request) {
         ResponseEntity<?> responseEntity;
         try {
+            appointmentService.updateAppointment(rq.getBookingCode(), rq.getAppointmentTime(), rq.getWorkShiftId());
             responseEntity = wrapperResponse.success(new ResponseData<>(ConstantsUtil.SUCCSESS, ConstantsUtil.SUCCSESS_MESS,
-                    appointmentService.updateAppointment(rq.getBookingCode(), rq.getAppointmentTime(), rq.getWorkShiftId())));
+                    rq));
         } catch (Exception e) {
             responseEntity = wrapperResponse.error(new ResponseData<>(ConstantsUtil.ERROR, e.getMessage(), null), HttpStatus.BAD_REQUEST);
         }
