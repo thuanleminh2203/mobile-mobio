@@ -1,5 +1,6 @@
 package com.venesa.mobio.MobileMobio.controller;
 
+import com.venesa.common.DTO.crm.request.CRMBookingBase;
 import com.venesa.common.DTO.mobio.request.BookingBase;
 import com.venesa.common.Utils.ConstantsUtil;
 import com.venesa.common.config.EnvironmentConfig;
@@ -19,11 +20,10 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/mobio/mobile/")
 public class AppointmentController {
     private final WrapperResponseData wrapperResponse;
-    private final EnvironmentConfig environmentConfig;
     private final AppointmentService appointmentService;
 
-    @PutMapping("/updateAppointment")
-    public ResponseEntity<?> updateAppointment(@RequestBody BookingBase rq, HttpServletRequest request) {
+    @PutMapping("updateAppointment")
+    public ResponseEntity<?> updateAppointment(@RequestBody CRMBookingBase rq) {
         ResponseEntity<?> responseEntity;
         try {
             appointmentService.updateAppointment(rq.getBookingCode(), rq.getAppointmentTime(), rq.getWorkShiftId());
