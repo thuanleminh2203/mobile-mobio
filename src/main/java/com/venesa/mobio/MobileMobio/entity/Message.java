@@ -25,7 +25,7 @@ public class Message {
     private String message;
 
     @Column(name = "phone_number")
-    private String phoneNumber;
+    private String phone;
 
     @Column(name = "type")
     private int type;

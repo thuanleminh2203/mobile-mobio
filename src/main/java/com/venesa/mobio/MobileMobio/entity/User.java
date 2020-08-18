@@ -14,9 +14,8 @@ import java.util.Date;
 @Data
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mobile_id")
-    private int mobileId;
+    private String mobileId;
 
     @Column(name = "full_name")
     private String fullName;
@@ -27,14 +26,23 @@ public class User {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "id_card_no")
-    private String idCardNo;
+    @Column(name = "identify_code")
+    private String identifyCode;
 
     @Column(name = "gender")
     private int gender;
 
     @Column(name = "birthday")
     private String birthday;
+
+    @Column(name = "card_id")
+    private int cardId;
+
+    @Column(name = "card_code")
+    private String cardCode;
+
+    @Column(name = "identify_type")
+    private int identifyType;
 
     @Column(name = "province_code")
     private String provinceCode;

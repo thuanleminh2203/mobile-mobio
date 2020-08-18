@@ -9,27 +9,21 @@ import com.venesa.mobio.MobileMobio.service.SurveyService;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @CrossOrigin
 @AllArgsConstructor
-@RequestMapping("/mobio/mobile/")
+@RequestMapping("/mobio/mobile")
 public class SurveyController {
     private final WrapperResponseData wrapperResponse;
-    @Autowired
-    private SurveyService surveyService;
+
+    private final SurveyService surveyService;
 
     @GetMapping("/getAllSurvey")
-    public ResponseEntity<?> findAllSurvey(HttpServletRequest request) {
+    public ResponseEntity<?> findAllSurvey() {
         ResponseEntity<?> responseEntity;
         try {
             responseEntity = wrapperResponse.success(new ResponseData<>(ConstantsUtil.SUCCSESS, ConstantsUtil.SUCCSESS_MESS, surveyService.getAll()));
@@ -41,7 +35,7 @@ public class SurveyController {
     }
 
     @PostMapping("/createSurvey")
-    public ResponseEntity<?> findAllSurvey(@RequestBody CRMSurveyDTO surveyDTO, HttpServletRequest request) {
+    public ResponseEntity<?> findAllSurvey(@RequestBody CRMSurveyDTO surveyDTO) {
 
         ModelMapper modelMapper = new ModelMapper();
         Survey survey = modelMapper.map(surveyDTO, Survey.class);

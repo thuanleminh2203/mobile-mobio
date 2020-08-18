@@ -3,15 +3,16 @@ package com.venesa.mobio.MobileMobio.serviceImpl;
 import com.venesa.mobio.MobileMobio.entity.Survey;
 import com.venesa.mobio.MobileMobio.repository.SurveyRepository;
 import com.venesa.mobio.MobileMobio.service.SurveyService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class SurveyServiceImpl implements SurveyService {
-    @Autowired
-    private SurveyRepository surveyRepository;
+    private final SurveyRepository surveyRepository;
 
     @Override
     public List<Survey> getAll() {
