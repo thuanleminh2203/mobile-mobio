@@ -27,7 +27,7 @@ public class Survey implements Serializable {
 
     @Column(name = "customer_code")
     private String customerCode;
-////
+
     @Column(name = "rating")
     private int rating;
 
